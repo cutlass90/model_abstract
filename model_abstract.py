@@ -6,7 +6,6 @@ import math
 import numpy as np
 import tensorflow as tf
 
-from ..utils import tools
 
 class Model(object):
     """Abstract class representing a tensorflow scikit-learn-like model.
