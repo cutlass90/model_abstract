@@ -37,9 +37,9 @@ class Model(object):
         if load_path is None:
             print('Can not load model, start new train')
             raise FileNotFoundError
-        print('try to load {}'.format(load_path))
+        print('try to load {} ...'.format(load_path), end='')
         self.saver.restore(self.sess, load_path)
-        print("Model restored from file %s" % load_path)
+        print('Done!')
 
 
     # --------------------------------------------------------------------------
