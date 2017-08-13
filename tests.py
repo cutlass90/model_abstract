@@ -12,11 +12,14 @@ class ToolsTests(unittest.TestCase):
         labels = np.vstack([np.eye(10)]*10)
         class_distrib = {i:i+1 for i in range(10)}
 
-        splited_images, splited_labels =  tools.split_data_set(class_distrib, images, labels)
-        self.assertEqual(splited_images.shape, (55,2))
-        self.assertEqual(splited_labels.shape, (55,10))
-        for i,v in enumerate(np.sum(splited_labels,0)):
-            self.assertEqual(class_distrib[i], v)
+        splited_im, splited_l, rest_im, rest_l = tools.split_data_set(
+            class_distrib, images, labels)
+        self.assertEqual(splited_im.shape, (55,2))
+        self.assertEqual(splited_l.shape, (55,10))
+        self.assertEqual(rest_im.shape, (45,2))
+        self.assertEqual(rest_l.shape, (45,10))
+        for i,spl in enumerate(np.sum(splited_l,0)):
+            self.assertEqual(class_distrib[i], spl)
         class_distrib[0]=11
         with self.assertRaises(ValueError):
             tools.split_data_set(class_distrib, images, labels)
